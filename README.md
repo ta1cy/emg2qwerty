@@ -1,4 +1,4 @@
-# C147/247 Final Project — EMG-to-QWERTY
+# C147/247 Final Project
 ### Winter 2026
 
 Forked from [Calvin-Pang/emg2qwerty](https://github.com/Calvin-Pang/emg2qwerty), which builds on Meta's [emg2qwerty](https://github.com/facebookresearch/emg2qwerty) baseline.
@@ -21,7 +21,7 @@ The baseline uses a single architecture: **TDS-Conv** (Time Depth-Separable Conv
 | **CNN + GRU** | `cnn_gru_ctc.yaml` | `CNNGRUEncoder` | 1D CNN feature extractor → bidirectional GRU |
 | **CNN + Transformer** | `cnn_transformer_ctc.yaml` | `CNNTransformerEncoder` | 1D CNN feature extractor → Transformer |
 
-All architectures share the same front-end (`SpectrogramNorm` → `MultiBandRotationInvariantMLP`) and CTC loss training pipeline via a common `BaseCTCModule` in `lightning.py`.
+All architectures share the same front-end and CTC loss training pipeline by a common `BaseCTCModule` in `lightning.py`.
 
 ### Files Added/Modified
 
