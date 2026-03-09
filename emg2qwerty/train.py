@@ -11,10 +11,17 @@ from collections.abc import Sequence
 from pathlib import Path
 from typing import Any
 
+import functools
+
 import hydra
 import pytorch_lightning as pl
+import torch
 from hydra.utils import get_original_cwd, instantiate
 from omegaconf import DictConfig, ListConfig, OmegaConf
+
+# PyTorch 2.6+ defaults torch.load to weights_only=True, but PL checkpoints
+# contain OmegaConf objects incompatible with this setting.
+torch.load = functools.partial(torch.load, weights_only=False)
 
 from emg2qwerty import transforms, utils
 from emg2qwerty.transforms import Transform
@@ -43,10 +50,9 @@ def main(config: DictConfig):
 
     # Helper to instantiate full paths for dataset sessions
     def _full_session_paths(dataset: ListConfig) -> list[Path]:
-        sessions = [session["session"] for session in dataset]
         return [
-            Path(config.dataset.root).joinpath(f"{session}.hdf5")
-            for session in sessions
+            Path(config.dataset.root).joinpath(str(entry["user"]), f"{entry['session']}.hdf5")
+            for entry in dataset
         ]
 
     # Helper to instantiate transforms
@@ -64,12 +70,19 @@ def main(config: DictConfig):
     )
     if config.checkpoint is not None:
         log.info(f"Loading module from checkpoint {config.checkpoint}")
-        module = module.load_from_checkpoint(
-            config.checkpoint,
+        # Pass all module constructor args so load_from_checkpoint can
+        # re-instantiate the model even if the checkpoint doesn't store them.
+        module_kwargs = {
+            k: v
+            for k, v in OmegaConf.to_container(config.module, resolve=True).items()
+            if k != "_target_"
+        }
+        module_kwargs.update(
             optimizer=config.optimizer,
             lr_scheduler=config.lr_scheduler,
             decoder=config.decoder,
         )
+        module = module.load_from_checkpoint(config.checkpoint, **module_kwargs)
 
     # Instantiate LightningDataModule
     log.info(f"Instantiating LightningDataModule {config.datamodule}")

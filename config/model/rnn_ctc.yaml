@@ -1,10 +1,12 @@
 # @package _global_
 module:
-  _target_: emg2qwerty.lightning.TDSConvCTCModule
+  _target_: emg2qwerty.lightning.RNNCTCModule
   in_features: 528
   mlp_features: [384]
-  block_channels: [24, 24, 24, 24]
-  kernel_width: 32
+  hidden_size: 512
+  num_layers: 3
+  dropout: 0.1
+  bidirectional: true
 
 datamodule:
   _target_: emg2qwerty.lightning.WindowedEMGDataModule
