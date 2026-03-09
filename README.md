@@ -30,6 +30,18 @@ All architectures share the same front-end and CTC loss training pipeline by a c
 - **`emg2qwerty/train.py`** — Updated to support selecting the new model architectures.
 - **`config/model/*.yaml`** — 8 new Hydra config files for the new architectures.
 
+### Best Results
+
+The **CNN + GRU** architecture achieved the best results across all models trained, with a **14.26% CER** after 130 epochs of training:
+
+| Metric | Value |
+|---|---|
+| **test/CER** | **14.2641** |
+| test/DER | 1.2535 |
+| test/IER | 3.0689 |
+| test/SER | 9.9416 |
+| test/loss | 0.7002 |
+
 ### Training a Model
 
 To train with a specific architecture, override the `model` config:
