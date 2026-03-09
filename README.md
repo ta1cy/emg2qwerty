@@ -42,16 +42,6 @@ The **CNN + GRU** architecture achieved the best results across all models train
 | test/SER | 9.9416 |
 | test/loss | 0.7002 |
 
-### Training a Model
-
-To train with a specific architecture, override the `model` config:
-
-```shell
-python -m emg2qwerty.train user=single_user model=gru_ctc trainer.accelerator=gpu trainer.devices=1
-python -m emg2qwerty.train user=single_user model=cnn_lstm_ctc trainer.accelerator=gpu trainer.devices=1
-python -m emg2qwerty.train user=single_user model=transformer_ctc trainer.accelerator=gpu trainer.devices=1
-```
-
 ---
 
 _The rest of this README is from the original repo._
