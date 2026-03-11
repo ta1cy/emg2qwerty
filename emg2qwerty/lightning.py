@@ -270,11 +270,6 @@ class TDSConvCTCModule(pl.LightningModule):
             lr_scheduler_config=self.hparams.lr_scheduler,
         )
 
-
-# =============================================================================
-# New Model Architectures: RNN, LSTM, GRU, Transformer and Hybrid variants
-# =============================================================================
-
 from emg2qwerty.modules_new import (
     RNNEncoder,
     LSTMEncoder,
@@ -301,13 +296,8 @@ class BaseCTCModule(pl.LightningModule):
     ) -> None:
         super().__init__()
         
-        # Criterion
         self.ctc_loss = nn.CTCLoss(blank=charset().null_class)
-        
-        # Decoder
         self.decoder = instantiate(decoder)
-        
-        # Metrics
         metrics = MetricCollection([CharacterErrorRates()])
         self.metrics = nn.ModuleDict(
             {
@@ -327,12 +317,10 @@ class BaseCTCModule(pl.LightningModule):
         input_lengths = batch["input_lengths"]
         target_lengths = batch["target_lengths"]
         N = len(input_lengths)
-
         emissions = self.forward(inputs)
-
         T_diff = inputs.shape[0] - emissions.shape[0]
         emission_lengths = input_lengths - T_diff
-
+        
         loss = self.ctc_loss(
             log_probs=emissions,
             targets=targets.transpose(0, 1),
@@ -387,8 +375,7 @@ class BaseCTCModule(pl.LightningModule):
 
 
 class RNNCTCModule(BaseCTCModule):
-    """RNN-based CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -427,8 +414,7 @@ class RNNCTCModule(BaseCTCModule):
 
 
 class LSTMCTCModule(BaseCTCModule):
-    """LSTM-based CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -467,8 +453,7 @@ class LSTMCTCModule(BaseCTCModule):
 
 
 class GRUCTCModule(BaseCTCModule):
-    """GRU-based CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -507,8 +492,7 @@ class GRUCTCModule(BaseCTCModule):
 
 
 class CNNRNNCTCModule(BaseCTCModule):
-    """CNN + RNN hybrid CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -551,8 +535,7 @@ class CNNRNNCTCModule(BaseCTCModule):
 
 
 class CNNLSTMCTCModule(BaseCTCModule):
-    """CNN + LSTM hybrid CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -595,8 +578,7 @@ class CNNLSTMCTCModule(BaseCTCModule):
 
 
 class CNNGRUCTCModule(BaseCTCModule):
-    """CNN + GRU hybrid CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -639,8 +621,7 @@ class CNNGRUCTCModule(BaseCTCModule):
 
 
 class TransformerCTCModule(BaseCTCModule):
-    """Transformer-based CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
@@ -679,8 +660,7 @@ class TransformerCTCModule(BaseCTCModule):
 
 
 class CNNTransformerCTCModule(BaseCTCModule):
-    """CNN + Transformer hybrid CTC model."""
-    
+
     def __init__(
         self,
         in_features: int,
