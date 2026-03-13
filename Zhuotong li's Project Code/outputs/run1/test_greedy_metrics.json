@@ -1,0 +1,15 @@
+{
+  "split": "test",
+  "decode": "greedy",
+  "checkpoint": "ckpt_best.pt",
+  "window": 2000,
+  "stride": 2000,
+  "context_left": 400,
+  "context_right": 400,
+  "beam_size": 10,
+  "beam_token_prune": 10,
+  "cer": 0.2453945872185581,
+  "total_edits": 1079,
+  "total_chars": 4397,
+  "num_samples": 1047
+}

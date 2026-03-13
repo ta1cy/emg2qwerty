@@ -1,0 +1,25 @@
+{
+  "split": "test",
+  "decode": "beam",
+  "checkpoint": "ckpt_cnn_best.pt",
+  "model_type": "cnn_transformer",
+  "model_kwargs": {
+    "d_model": 256,
+    "nhead": 8,
+    "num_layers": 4,
+    "dim_feedforward": 1024,
+    "dropout": 0.1,
+    "cnn_layers": 4,
+    "cnn_kernel_size": 5
+  },
+  "window": 2000,
+  "stride": 2000,
+  "context_left": 400,
+  "context_right": 400,
+  "beam_size": 10,
+  "beam_token_prune": 10,
+  "cer": 0.20104616784171025,
+  "total_edits": 884,
+  "total_chars": 4397,
+  "num_samples": 1047
+}

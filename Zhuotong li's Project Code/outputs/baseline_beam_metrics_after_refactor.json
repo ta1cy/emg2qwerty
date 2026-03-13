@@ -1,0 +1,17 @@
+{
+  "split": "test",
+  "decode": "beam",
+  "checkpoint": "ckpt_best.pt",
+  "model_type": "transformer",
+  "model_kwargs": {},
+  "window": 2000,
+  "stride": 2000,
+  "context_left": 400,
+  "context_right": 400,
+  "beam_size": 10,
+  "beam_token_prune": 10,
+  "cer": 0.23902660905162612,
+  "total_edits": 1051,
+  "total_chars": 4397,
+  "num_samples": 1047
+}
