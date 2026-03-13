@@ -44,8 +44,7 @@ The **CNN + GRU** architecture achieved the best results across all models train
 
 ### Team Contributions
 
-- The "Modified Google Collabs" folder includes modified collab .ipynb files from fellow groupmates Ethan Cheng and Ahmad Khan. 
-- The "Zhuotong li's Project Code" folder includes their Transformer and CNN + Transformer implementations. 
+- Each group member's project codes are under their respective named folders: "Zhuotong li's Project Code", "Ethan Cheng's Project Code", and "Ahmad Khan's Project Code". 
 
 ---
 
