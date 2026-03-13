@@ -25,10 +25,10 @@ All architectures share the same front-end and CTC loss training pipeline by a c
 
 ### Files Added/Modified
 
-- **`emg2qwerty/modules_new.py`** — New encoder modules: `CNNEncoder`, `RNNEncoder`, `LSTMEncoder`, `GRUEncoder`, `TransformerEncoder`, `PositionalEncoding`, and CNN+RNN/LSTM/GRU/Transformer hybrid encoders.
-- **`emg2qwerty/lightning.py`** — Added `BaseCTCModule` (shared CTC training logic) and 8 new Lightning modules (`RNNCTCModule`, `LSTMCTCModule`, `GRUCTCModule`, `CNNRNNCTCModule`, `CNNLSTMCTCModule`, `CNNGRUCTCModule`, `TransformerCTCModule`, `CNNTransformerCTCModule`).
-- **`emg2qwerty/train.py`** — Updated to support selecting the new model architectures.
-- **`config/model/*.yaml`** — 8 new Hydra config files for the new architectures.
+- **`emg2qwerty/modules_new.py`** New encoder modules: `CNNEncoder`, `RNNEncoder`, `LSTMEncoder`, `GRUEncoder`, `TransformerEncoder`, `PositionalEncoding`, and CNN+RNN/LSTM/GRU/Transformer hybrid encoders.
+- **`emg2qwerty/lightning.py`** Added `BaseCTCModule` (shared CTC training logic) and 8 new Lightning modules (`RNNCTCModule`, `LSTMCTCModule`, `GRUCTCModule`, `CNNRNNCTCModule`, `CNNLSTMCTCModule`, `CNNGRUCTCModule`, `TransformerCTCModule`, `CNNTransformerCTCModule`).
+- **`emg2qwerty/train.py`** Updated to support selecting the new model architectures.
+- **`config/model/*.yaml`** 8 new Hydra config files for the new architectures.
 
 ### Best Results
 
@@ -41,6 +41,11 @@ The **CNN + GRU** architecture achieved the best results across all models train
 | test/IER | 3.0689 |
 | test/SER | 9.9416 |
 | test/loss | 0.7002 |
+
+### Team Contributions
+
+- The "Modified Google Collabs" folder includes modified collab .ipynb files from fellow groupmates Ethan Cheng and Ahmad Khan. 
+- The "Zhuotong li's Project Code" folder includes their Transformer and CNN + Transformer implementations. 
 
 ---
 
